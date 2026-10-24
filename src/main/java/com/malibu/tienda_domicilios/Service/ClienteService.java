@@ -1,14 +1,14 @@
 package com.malibu.tienda_domicilios.Service;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import com.malibu.tienda_domicilios.Model.ClienteModel;
 import com.malibu.tienda_domicilios.Repository.ClienteRepository;
 
-@Service 
+@Service
 public class ClienteService {
-
 
     private final ClienteRepository clienteRepository;
 
@@ -20,10 +20,9 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    
     public ClienteModel obtenerClientePorId(Long id) {
         return clienteRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
     }
 
     public ClienteModel guardarCliente(ClienteModel cliente) {
@@ -34,5 +33,11 @@ public class ClienteService {
         return clienteRepository.findBynombreContainingIgnoreCase(keyword);
     }
 
+    public ClienteModel actualizarCliente(Long id, ClienteModel datos) {
+    ClienteModel cliente = obtenerClientePorId(id);
+    cliente.setNombre(datos.getNombre());
+    cliente.setTelefono(datos.getTelefono());
+    cliente.setApartamento(datos.getApartamento());
+    return clienteRepository.save(cliente);
 }
-
+}

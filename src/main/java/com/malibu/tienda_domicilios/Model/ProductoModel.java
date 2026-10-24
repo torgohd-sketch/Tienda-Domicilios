@@ -12,27 +12,28 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "productos")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     
     private String nombre;
     private String descripcion;
     private Double precio;
     private Integer stock;
-    private boolean Estado;
+    private Boolean estado = true;
 
-    public Long getId() {
+
+    public ProductoModel() {}
+
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -68,13 +69,12 @@ public class ProductoModel {
         this.stock = stock;
     }
     
-        public boolean getEstado() {
-        return Estado;
-    }
+        public Boolean getEstado() {
+    return estado;
+}
 
-    public void setEstado(boolean Estado) {
-        this.Estado = Estado;
-    }
-
+public void setEstado(Boolean estado) {
+    this.estado = estado;
+}
 }
 
